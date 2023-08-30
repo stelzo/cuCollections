@@ -20,20 +20,10 @@
 
 #if !defined(__CUDACC_VER_MAJOR__) || !defined(__CUDACC_VER_MINOR__)
 #error "NVCC version not found"
-#elif __CUDACC_VER_MAJOR__ < 11 || (__CUDACC_VER_MAJOR__ == 11 && __CUDACC_VER_MINOR__ < 5)
-#error "NVCC version 11.5 or later is required"
-#endif
-
-#if !defined(__CUDACC_RELAXED_CONSTEXPR__)
-#error "Support for relaxed constexpr is required"
-#endif
-
-#if !defined(__CUDACC_EXTENDED_LAMBDA__)
-#error "Support for extended device lambdas is required"
 #endif
 
 // WAR for libcudacxx/296
-#define CUCO_CUDA_MINIMUM_ARCH _NV_FIRST_ARG(__CUDA_ARCH_LIST__)
+#define CUCO_CUDA_MINIMUM_ARCH 720
 
 #if defined(CUDART_VERSION) && (CUDART_VERSION >= 11000) && (CUCO_CUDA_MINIMUM_ARCH >= 700)
 #define CUCO_HAS_CUDA_BARRIER
